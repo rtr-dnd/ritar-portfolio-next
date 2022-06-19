@@ -1,8 +1,13 @@
 import type { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Content, works } from '../contents/contents'
 import styles from '../styles/Home.module.css'
+
+const Work = dynamic(async () => {
+  const importedModule = await import('../components/Work')
+  return importedModule.Work
+}, {ssr: false})
 
 const Home: NextPage = () => {
   return (
@@ -29,16 +34,7 @@ const Home: NextPage = () => {
           <div className={styles.divider}></div>
           <h2>Works</h2>
           {works.map((e: Content) => {
-            return <section className={styles.work} key={e.title}>
-              <h3>{e.title}</h3>
-              <a href={e.link}>Link</a>
-              <p>{e.desc}</p>
-              {e.img && 
-                <div className={styles.img}>
-                  <Image src={e.img} alt='description image' layout='fill' objectFit='contain' />
-                </div>
-              }
-            </section>
+            return <Work e={e} key={e.title}/>
           })}
         </section>
       </main>

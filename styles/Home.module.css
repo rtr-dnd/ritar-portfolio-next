@@ -24,20 +24,6 @@ section.works {
   top: 50vh;
 }
 
-section.work {
-  padding: 12px 0;
-}
-
-.img {
-  position: fixed;
-  right: 0;
-  top: 50vh;
-  transform: translateY(-50%);
-  width: 70vw;
-  height: 90vh;
-  z-index: -1;
-}
-
 .footer {
   height: 90vh;
   display: flex;
