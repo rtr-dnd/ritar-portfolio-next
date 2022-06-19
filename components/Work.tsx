@@ -27,7 +27,7 @@ export const Work = (props: {e: Content}) => {
 
   return <section className={styles.work} key={props.e.title} ref={contentRef}>
     <h3>{props.e.title}</h3>
-    <a href={props.e.link}>Link</a>
+    <a href={props.e.link}>[ Link ]</a>
     <p>{props.e.desc}</p>
     {props.e.img && 
       <div className={styles.img} ref={imgRef}>
