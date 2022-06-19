@@ -22,17 +22,20 @@ export const works: Content[] = [
   {
     title: 'なんでもドラムマシン',
     link: 'https://twitter.com/rtr_dnd/status/1438515341773062154?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
-    desc: '趣味で制作しているAR動画シリーズの一環です。'
+    desc: '趣味で制作しているAR動画シリーズの一環です。',
+    img: '/img/drummachine.gif'
   },
   {
     title: '「開ける前にわかる」AR',
     link: 'https://twitter.com/rtr_dnd/status/1510576211486920704?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
-    desc: '趣味で制作しているAR動画シリーズの一環です。'
+    desc: '趣味で制作しているAR動画シリーズの一環です。',
+    img: '/img/signifier.gif'
   },
   {
     title: '「ファイルシステム」よ、さようなら',
     link: 'https://note.com/ritar/n/n780cc162b093',
-    desc: 'アドベントカレンダーで書いた記事です。「ファイルシステム」がユーザから見えなくなりつつあるという現象を、UIの歴史とともに紐解くことを試みました。'
+    desc: 'アドベントカレンダーで書いた記事です。「ファイルシステム」がユーザから見えなくなりつつあるという現象を、UIの歴史とともに紐解くことを試みました。',
+    img: '/img/filesystem.webp'
   },
 
 ]

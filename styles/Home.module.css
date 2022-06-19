@@ -2,8 +2,15 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
-section.first {
-  height: 85vh;
+.first {
+  height: 90vh;
+}
+
+.headlines {
+  /* height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; */
 }
 
 section.works {
@@ -19,9 +26,14 @@ section.works {
   width: 100vw;
   height: 1px;
   border-top: 1px solid;
-  border-color: rgba(0, 0, 0, 0.2);
-  position: sticky;
+  border-color: rgba(0, 0, 0, 0.1);
+  /* position: sticky; */
+  position: fixed;
   top: 50vh;
+}
+
+.workwrapper {
+  padding: 12px 0;
 }
 
 .footer {

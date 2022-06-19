@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import Link from 'next/link'
 import { Content, works } from '../contents/contents'
 import styles from '../styles/Home.module.css'
 
@@ -19,28 +20,32 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1>
-          {/* Hi. I&apos;m ritar. */}
-          こんにちは。
-        </h1>
-        <section className={styles.first}>
-          <p>
-            ritarと申します。<br />
-            東京大学大学院 情報理工学系研究科 葛岡雨宮鳴海研究室に所属しています。<br />
-          </p>
-        </section>
+        <div className={styles.first}>
+          <div className={styles.headlines}>
+            <h1>
+              こんにちは。
+            </h1>
+            <p>[ Languages: ja / <Link href='/'>en</Link> ]</p>
+            <p>
+              ritarと申します。<br />
+              東京大学大学院 情報理工学系研究科 葛岡雨宮鳴海研究室に所属しています。<br />
+            </p>
+          </div>
+        </div>
 
         <section className={styles.works}>
           <div className={styles.divider}></div>
           <h2>Works</h2>
           {works.map((e: Content) => {
-            return <Work e={e} key={e.title}/>
+            return <div className={styles.workwrapper} key={e.title}>
+              <Work e={e} />
+            </div>
           })}
         </section>
       </main>
 
       <footer className={styles.footer}>
-          <p>Copyright statements goes here.</p>
+          <p>©2021, ritar</p>
       </footer>
     </div>
   )
