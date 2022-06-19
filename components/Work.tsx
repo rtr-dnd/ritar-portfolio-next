@@ -31,7 +31,7 @@ export const Work = (props: {e: Content}) => {
     <p>{props.e.desc}</p>
     {props.e.img && 
       <div className={styles.img} ref={imgRef}>
-        <Image src={props.e.img} alt='description image' layout='fill' objectFit='contain' />
+        <Image src={props.e.img} alt='description image' layout='fill' objectFit='contain' priority={true}/>
       </div>
     }
   </section>
