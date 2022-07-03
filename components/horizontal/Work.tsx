@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Content } from "../contents/contents"
+import { Content } from "../../contents/contents"
 import styles from './Work.module.css'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
