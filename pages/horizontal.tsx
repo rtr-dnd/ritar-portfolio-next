@@ -14,6 +14,7 @@ const Horizontal: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
+        <title>Horizontal | works by ritar</title>
         <meta property="og:type" content="website" />
         <meta
           property="og:title"

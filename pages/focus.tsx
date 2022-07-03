@@ -65,6 +65,7 @@ const Focus: NextPage = () => {
   return (
     <ParallaxProvider>
       <Head>
+        <title>Focus | works by ritar</title>
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
