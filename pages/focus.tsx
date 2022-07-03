@@ -64,6 +64,26 @@ const InsideFocus = () => {
 const Focus: NextPage = () => {
   return (
     <ParallaxProvider>
+      <Head>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Focus | works by ritar"
+        />
+        <meta
+          property="og:image"
+          content={"https://ritar-portfolio.vercel.app/ogp_focus.png"}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:title"
+          content="Focus | works by ritar"
+        />
+        <meta
+          name="twitter:image"
+          content={"https://ritar-portfolio.vercel.app/ogp_focus.png"}
+        />
+      </Head>
       <InsideFocus />
     </ParallaxProvider>
   )
