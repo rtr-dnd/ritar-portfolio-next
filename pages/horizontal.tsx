@@ -3,14 +3,14 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
 import { Content, works } from '../contents/contents'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/horizontal.module.css'
 
 const Work = dynamic(async () => {
   const importedModule = await import('../components/horizontal/Work')
   return importedModule.Work
 }, {ssr: false})
 
-const Home: NextPage = () => {
+const Horizontal: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -51,4 +51,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Horizontal

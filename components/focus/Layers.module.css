@@ -1,0 +1,70 @@
+.firstlayer,
+.secondlayer,
+.imagelayer,
+.bglayer {
+  pointer-events: all;
+}
+
+.bglayer {
+  /* background-color: #fff;
+  opacity: 0.8;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.8) 0.5px, #fff 0.5px);
+  background-size: 24px 24px; */
+  /* background-color: #fff;
+  opacity: 0.8;
+  background:
+    radial-gradient(circle, transparent 20%, #fff 20%, #fff 80%, transparent 80%, transparent),
+    radial-gradient(circle, transparent 20%, #fff 20%, #fff 80%, transparent 80%, transparent) 25px 25px,
+    linear-gradient(rgba(0, 0, 0, 0.2) 2px, transparent 2px) 0 -1px,
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2) 2px, #fff 2px) -1px 0;
+  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px; */
+  background-color: #ffffff;
+  opacity: 0.6;
+  background: radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent) 12.5px 12.5px, linear-gradient(#9694b6 1px, transparent 1px) 0 -0.5px, linear-gradient(90deg, #9694b6 1px, #ffffff 1px) -0.5px 0;
+  background-size: 25px 25px, 25px 25px, 12.5px 12.5px, 12.5px 12.5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: filter 0.1s ease;
+}
+
+.firstlayer,
+.secondlayer,
+.imagelayer {
+  display: inline-block;
+  transition: text-shadow 0.1s ease;
+  position: relative;
+}
+
+h1.h1,
+h2.h2,
+h3.h3 {
+  font-weight: normal;
+  display: inline-block;
+}
+
+h1.h1 {
+  font-size: 48px;
+  margin: 12px 0;
+}
+
+h2.h2 {
+  font-size: 48px;
+}
+
+.firstlayer {
+  z-index: 4;
+}
+
+.secondlayer {
+  margin-left: 32px;
+  z-index: 3;
+}
+
+.imagelayer {
+  z-index: 2;
+  width: 60%;
+  transition: filter 0.1s ease;
+}

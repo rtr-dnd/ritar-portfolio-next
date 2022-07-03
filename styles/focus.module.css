@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,138.2,100&display=swap');
+
+.container {
+  color: transparent;
+  padding: 120px 24px;
+  font-family: 'Roboto Flex', sans-serif;
+  position: relative;
+}
+
+main.main {
+  margin: 0 auto;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+h1.h1,
+h2.h2,
+h3.h3 {
+  font-weight: normal;
+  display: inline-block;
+}
+
+h1.h1 {
+  font-size: 48px;
+}
+
+h2.h2 {
+  font-size: 40px;
+}
+
+.works {
+  margin-top: 40vh;
+  display: inline-block;
+  width: 100%;
+  pointer-events: none;
+}
