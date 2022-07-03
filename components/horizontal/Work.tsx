@@ -31,7 +31,13 @@ export const Work = (props: {e: Content}) => {
     <p>{props.e.desc}</p>
     {props.e.img && 
       <div className={styles.img} ref={imgRef}>
-        <Image src={props.e.img} alt='description image' layout='fill' objectFit='contain' priority={true}/>
+        {
+          props.e.isVideo
+          ? <video className={styles.vid} loop muted autoPlay playsInline>
+              <source src={props.e.img} type="video/webm" />
+            </video>
+          : <Image src={props.e.img} alt='description image' layout='fill' objectFit='contain' priority={true}/>
+        }
       </div>
     }
   </section>
