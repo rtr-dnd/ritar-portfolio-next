@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useParallax } from "react-scroll-parallax"
-import { RootState } from "../../store"
-import { focusSlice } from "../../store/focus"
+import { AppDispatch, RootState } from "../../store"
+import { asyncFocus, focusSlice } from "../../store/focus"
 import styles from "./Layers.module.css"
 
 export type LayerProps = {
@@ -16,14 +16,14 @@ export const FirstLayer: React.FC<LayerProps> = ({
   children,
 }) => {
   const focusVal = useSelector((state: RootState) => state.focus.focusVal)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const focus = () => {
-    dispatch(focusSlice.actions.focusAt(0))
+    dispatch(asyncFocus(0))
   }
 
   return (
     <div className={styles.firstlayer} onMouseEnter={focus} style={{
-      textShadow: '0 0 ' + (focusVal * maxBlurVal).toString() + 'px rgba(0, 0, 0, 0.8)'
+      textShadow: '0 0 ' + (focusVal * maxBlurVal).toString() + 'px rgba(0, 0, 0, 1)'
     }}>
       {children}
     </div>
@@ -35,9 +35,9 @@ export const SecondLayer: React.FC<LayerProps> = ({
   children,
 }) => {
   const focusVal = useSelector((state: RootState) => state.focus.focusVal)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const focus = () => {
-    dispatch(focusSlice.actions.focusAt(1/3))
+    dispatch(asyncFocus(1/3))
   }
 
   const {ref} = useParallax<HTMLParagraphElement>({speed: -7})
@@ -46,7 +46,7 @@ export const SecondLayer: React.FC<LayerProps> = ({
     <div className={styles.secondlayer} ref={ref} onMouseEnter={focus} style={{
       textShadow: '0 0 ' + (
         Math.abs(maxBlurVal * focusVal - maxBlurVal / 3)
-      ).toString() + 'px rgba(0, 0, 0, 0.8)'
+      ).toString() + 'px rgba(0, 0, 0, 1)'
     }}>
       {children}
     </div>
@@ -58,13 +58,13 @@ export const ImageLayer: React.FC<LayerProps> = ({
   children,
 }) => {
   const focusVal = useSelector((state: RootState) => state.focus.focusVal)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const focus = () => {
-    dispatch(focusSlice.actions.focusAt(2/3))
+    dispatch(asyncFocus(2/3))
   }
 
   const {ref} = useParallax<HTMLParagraphElement>({speed: -14})
-  const blurVal = 5
+  const blurVal = 12
 
   return (
     <div className={styles.imagelayer} ref={ref} onMouseEnter={focus} style={{
@@ -82,9 +82,9 @@ export const BgLayer: React.FC<LayerProps> = ({
   children,
 }) => {
   const focusVal = useSelector((state: RootState) => state.focus.focusVal)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const focus = () => {
-    dispatch(focusSlice.actions.focusAt(1))
+    dispatch(asyncFocus(1))
   }
 
   const {ref} = useParallax<HTMLDivElement>({speed: -100})

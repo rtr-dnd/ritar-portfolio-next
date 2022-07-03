@@ -13,11 +13,20 @@ export const Work = (props: {e: Content}) => {
         </h3>
         <p className={styles.desc}>{props.e.desc}</p>
       </SecondLayer>
-      <ImageLayer>
-        {props.e.img
-          ? <Image className={styles.img} src={props.e.img} alt='description image' priority={true}/>
-          : <div></div>
-        }
-      </ImageLayer>
+      <div className={styles.imgplaceholder}></div>
+      <div className={styles.imgwrap}>
+        <ImageLayer>
+          {props.e.img
+            ? (
+              props.e.isVideo
+              ? <video className={styles.img} loop muted autoPlay playsInline>
+                  <source src={props.e.img} type="video/webm" />
+                </video>
+              : <Image className={styles.img} src={props.e.img} alt='description image' priority={true}/>
+            )
+            : <div></div>
+          }
+        </ImageLayer>
+      </div>
     </section>
 }

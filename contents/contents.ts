@@ -3,7 +3,8 @@ export type Content = {
   date?: number,
   link: string,
   desc: string,
-  img?: string
+  img?: string,
+  isVideo?: boolean,
 }
 
 export const works: Content[] = [
@@ -17,19 +18,22 @@ export const works: Content[] = [
     title: 'PinchLens',
     link: 'https://twitter.com/rtr_dnd/status/1283329784890527746?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
     desc: '計算機演習の授業の一環として制作しました。スマホでよくある「二本指でピンチしてズーム」を現実世界でできるアプリです。MediaPipe+OpenCVでジェスチャーを認識して拡大できます。',
-    img: '/img/pinchlens.gif'
+    img: '/img/pinchlens.webm',
+    isVideo: true
   },
   {
     title: 'なんでもドラムマシン',
     link: 'https://twitter.com/rtr_dnd/status/1438515341773062154?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
     desc: '趣味で制作しているAR動画シリーズの一環です。',
-    img: '/img/drummachine.gif'
+    img: '/img/drummachine.webm',
+    isVideo: true
   },
   {
     title: '「開ける前にわかる」AR',
     link: 'https://twitter.com/rtr_dnd/status/1510576211486920704?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
     desc: '趣味で制作しているAR動画シリーズの一環です。',
-    img: '/img/signifier.gif'
+    img: '/img/signifier.webm',
+    isVideo: true
   },
   {
     title: '「ファイルシステム」よ、さようなら',
