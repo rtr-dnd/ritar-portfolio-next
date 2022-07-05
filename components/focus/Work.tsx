@@ -21,6 +21,7 @@ export const Work = (props: {e: Content}) => {
               props.e.isVideo
               ? <video className={styles.img} loop muted autoPlay playsInline>
                   <source src={props.e.img} type="video/webm" />
+                  <source src={props.e.img2} type='video/mp4' />
                 </video>
               : <Image className={styles.img} src={props.e.img} alt='description image' priority={true}/>
             )

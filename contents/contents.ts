@@ -4,6 +4,7 @@ export type Content = {
   link: string,
   desc: string,
   img?: string,
+  img2?: string,
   isVideo?: boolean,
 }
 
@@ -19,6 +20,7 @@ export const works: Content[] = [
     link: 'https://twitter.com/rtr_dnd/status/1283329784890527746?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
     desc: '計算機演習の授業の一環として制作しました。スマホでよくある「二本指でピンチしてズーム」を現実世界でできるアプリです。MediaPipe+OpenCVでジェスチャーを認識して拡大できます。',
     img: '/img/pinchlens.webm',
+    img2: '/img/pinchlens.mp4',
     isVideo: true
   },
   {
@@ -26,6 +28,7 @@ export const works: Content[] = [
     link: 'https://twitter.com/rtr_dnd/status/1438515341773062154?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
     desc: '趣味で制作しているAR動画シリーズの一環です。',
     img: '/img/drummachine.webm',
+    img2: '/img/drummachine.mp4',
     isVideo: true
   },
   {
@@ -33,6 +36,7 @@ export const works: Content[] = [
     link: 'https://twitter.com/rtr_dnd/status/1510576211486920704?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
     desc: '趣味で制作しているAR動画シリーズの一環です。',
     img: '/img/signifier.webm',
+    img2: '/img/signifier.mp4',
     isVideo: true
   },
   {

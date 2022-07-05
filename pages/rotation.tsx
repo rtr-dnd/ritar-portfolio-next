@@ -126,6 +126,7 @@ const Rotation: NextPage = () => {
               e.isVideo
               ? <video className={styles.img} loop muted autoPlay playsInline>
                 <source src={e.img} type="video/webm"/>
+                <source src={e.img2} type="video/mp4" />
               </video>
               : <Image className={styles.img} src={e.img} alt='description image' priority={true} />
             )
