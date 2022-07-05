@@ -4,6 +4,8 @@ import styles from '../styles/rotation.module.css'
 import { Content, works } from '../contents/contents'
 import { title } from "process";
 import React, { useState } from "react";
+import Head from "next/head";
+import useMedia from "use-media";
 
 const headers: string[] = [
   'Greeting',
@@ -50,16 +52,50 @@ const mod = (n: number, m: number) => {
 const Rotation: NextPage = () => {
   const rotationGain = 1
   const [rotation, setRotation] = useState(0)
+  const isNarrow = useMedia({maxWidth: '720px'})
+  const [lastTouchVal, setLastTouchVal] = useState([0, 0])
 
   const currentIndex = headers.length - 1 - Math.abs(Math.trunc((mod(rotation, 360) - (360 / headers.length / 2)) / (360 / headers.length)))
 
   return (
     <div className={styles.container} onWheel={(e) => {
-      setRotation(rotation - (e.deltaY * rotationGain))
+      e.preventDefault()
+      setRotation((isNarrow ? (rotation + e.deltaX) : (rotation - e.deltaY) * rotationGain))
+    }} onTouchStart={(e) => {
+      setLastTouchVal([e.targetTouches[0].pageX, e.targetTouches[0].pageY])
+    }} onTouchMove={(e) => {
+      e.preventDefault()
+      setRotation((isNarrow
+        ? (rotation + (lastTouchVal[0] - e.targetTouches[0].pageX))
+        : (rotation - (lastTouchVal[1] - e.targetTouches[0].pageY)) * rotationGain))
+      setLastTouchVal([e.targetTouches[0].pageX, e.targetTouches[0].pageY])
+    }} onTouchEnd={(e) => {
+      setLastTouchVal([0, 0])
     }}>
+      <Head>
+        <title>Rotation | works by ritar</title>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Rotation | works by ritar"
+        />
+        <meta
+          property="og:image"
+          content={"https://ritar-portfolio.vercel.app/ogp_rotation.png"}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:title"
+          content="Rotation | works by ritar"
+        />
+        <meta
+          name="twitter:image"
+          content={"https://ritar-portfolio.vercel.app/ogp_rotation.png"}
+        />
+      </Head>
       <div className={styles.wheelwrap}>
         <WheelElement activeIndex={currentIndex} titles={headers} style={{
-          transform: 'rotate(' + rotation + 'deg)'
+          transform: (isNarrow ? 'rotate(90deg) ' : '') + 'rotate(' + rotation + 'deg)'
         }}/>
       </div>
       <div className={styles.contentwrap}>
