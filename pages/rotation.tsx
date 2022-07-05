@@ -55,19 +55,24 @@ const Rotation: NextPage = () => {
   const isNarrow = useMedia({maxWidth: '720px'})
   const [lastTouchVal, setLastTouchVal] = useState([0, 0])
 
-  const currentIndex = headers.length - 1 - Math.abs(Math.trunc((mod(rotation, 360) - (360 / headers.length / 2)) / (360 / headers.length)))
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const updateIndex = () => {
+    setCurrentIndex(
+      headers.length - 1 - Math.abs(Math.trunc((mod(rotation, 360) - (360 / headers.length / 2)) / (360 / headers.length)))
+    )
+  }
 
   return (
     <div className={styles.container} onWheel={(e) => {
-      e.preventDefault()
       setRotation((isNarrow ? (rotation + e.deltaX) : (rotation - e.deltaY) * rotationGain))
+      updateIndex()
     }} onTouchStart={(e) => {
       setLastTouchVal([e.targetTouches[0].pageX, e.targetTouches[0].pageY])
     }} onTouchMove={(e) => {
-      e.preventDefault()
       setRotation((isNarrow
         ? (rotation + (lastTouchVal[0] - e.targetTouches[0].pageX))
         : (rotation - (lastTouchVal[1] - e.targetTouches[0].pageY)) * rotationGain))
+      updateIndex()
       setLastTouchVal([e.targetTouches[0].pageX, e.targetTouches[0].pageY])
     }} onTouchEnd={(e) => {
       setLastTouchVal([0, 0])
@@ -99,7 +104,10 @@ const Rotation: NextPage = () => {
         }}/>
       </div>
       <div className={styles.contentwrap}>
-        <div className={styles.content} style={{visibility: currentIndex == 0 ? 'visible' : 'hidden'}}>
+        <div className={styles.content} style={{
+          visibility: currentIndex == 0 ? 'visible' : 'hidden',
+          opacity: currentIndex == 0 ? '1' : '0'
+        }}>
           <h2 className={styles.contenttitle}>こんにちは。</h2>
           <p className={styles.contentdesc}>
             ritarと申します。<br />
@@ -108,7 +116,10 @@ const Rotation: NextPage = () => {
         </div>
         {
           works.map((e: Content, index) => {
-            return <a href={e.link} className={styles.content} key={e.title} style={{visibility: currentIndex - 1 == index ? 'visible' : 'hidden'}}>
+            return <a href={e.link} className={styles.content} key={e.title} style={{
+              visibility: currentIndex - 1 == index ? 'visible' : 'hidden',
+              opacity: currentIndex - 1 == index ? '1' : '0'
+            }}>
             <h2 className={styles.contenttitle}>{e.title}</h2>
             <p className={styles.contentdesc}>{e.desc}</p>
             {e.img ? (
@@ -122,7 +133,10 @@ const Rotation: NextPage = () => {
           </a> 
           })
         }
-        <div className={styles.content} style={{visibility: currentIndex == works.length + 1 ? 'visible' : 'hidden'}}>
+        <div className={styles.content} style={{
+          visibility: currentIndex == works.length + 1 ? 'visible' : 'hidden',
+          opacity: currentIndex == works.length + 1 ? '1' : '0',
+        }}>
           <p className={styles.contentdesc}>©2021, ritar</p>
         </div>
       </div>

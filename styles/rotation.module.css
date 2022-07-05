@@ -6,6 +6,7 @@
   overflow-y: hidden;
   font-family: 'Roboto Flex', sans-serif;
   display: flex;
+  touch-action: none;
 }
 
 @media screen and (max-width: 720px) {
@@ -74,6 +75,7 @@
   flex-direction: column;
   justify-content: center;
   z-index: 10;
+  transition: 0.2s;
 }
 
 .contenttitle {
