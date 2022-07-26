@@ -1,15 +1,16 @@
 import { NextPage } from "next";
 import Image from 'next/future/image'
 import styles from '../styles/rotation.module.css'
-import { Content, works } from '../contents/contents'
+import { Content, works, categoryDesc, CategoryDesc } from '../contents/contents'
 import { title } from "process";
 import React, { useState } from "react";
 import Head from "next/head";
 import useMedia from "use-media";
+import { WorkGroup } from "../components/rotation/WorkGroup";
 
 const headers: string[] = [
   'Greeting',
-  ...(works.map(e => e.title)),
+  ...(categoryDesc.map(e => e.titleJa)),
   'Footer',
 ]
 
@@ -36,7 +37,7 @@ const WheelElement = (props: {titles: string[], activeIndex: number, style: Reac
         + 'rotate(' + (rotationAngle * index) + 'deg)',
         color: index == props.activeIndex ? '#000' : 'rgba(0, 0, 0, 0.2)'
       }}>
-        {(index >= 1 && index <= works.length) &&
+        {(index >= 1 && index <= categoryDesc.length) &&
           <p className={styles.wheelsubtitle}>Work</p>
         }
         <h2 className={styles.wheeltitle}>{e}</h2>
@@ -63,20 +64,7 @@ const Rotation: NextPage = () => {
   }
 
   return (
-    <div className={styles.container} onWheel={(e) => {
-      setRotation((isNarrow ? (rotation + e.deltaX) : (rotation - e.deltaY) * rotationGain))
-      updateIndex()
-    }} onTouchStart={(e) => {
-      setLastTouchVal([e.targetTouches[0].pageX, e.targetTouches[0].pageY])
-    }} onTouchMove={(e) => {
-      setRotation((isNarrow
-        ? (rotation + (lastTouchVal[0] - e.targetTouches[0].pageX))
-        : (rotation - (lastTouchVal[1] - e.targetTouches[0].pageY)) * rotationGain))
-      updateIndex()
-      setLastTouchVal([e.targetTouches[0].pageX, e.targetTouches[0].pageY])
-    }} onTouchEnd={(e) => {
-      setLastTouchVal([0, 0])
-    }}>
+    <div className={styles.container} >
       <Head>
         <title>Rotation | works by ritar</title>
         <meta property="og:type" content="website" />
@@ -98,7 +86,20 @@ const Rotation: NextPage = () => {
           content={"https://ritar-portfolio.vercel.app/ogp_rotation.png"}
         />
       </Head>
-      <div className={styles.wheelwrap}>
+      <div className={styles.wheelwrap} onWheel={(e) => {
+        setRotation((isNarrow ? (rotation + e.deltaX) : (rotation - e.deltaY) * rotationGain))
+        updateIndex()
+      }} onTouchStart={(e) => {
+        setLastTouchVal([e.targetTouches[0].pageX, e.targetTouches[0].pageY])
+      }} onTouchMove={(e) => {
+        setRotation((isNarrow
+          ? (rotation + (lastTouchVal[0] - e.targetTouches[0].pageX))
+          : (rotation - (lastTouchVal[1] - e.targetTouches[0].pageY)) * rotationGain))
+        updateIndex()
+        setLastTouchVal([e.targetTouches[0].pageX, e.targetTouches[0].pageY])
+      }} onTouchEnd={(e) => {
+        setLastTouchVal([0, 0])
+      }}>
         <WheelElement activeIndex={currentIndex} titles={headers} style={{
           transform: (isNarrow ? 'rotate(90deg) ' : '') + 'rotate(' + rotation + 'deg)'
         }}/>
@@ -115,28 +116,16 @@ const Rotation: NextPage = () => {
           </p>
         </div>
         {
-          works.map((e: Content, index) => {
-            return <a href={e.link} className={styles.content} key={e.title} style={{
-              visibility: currentIndex - 1 == index ? 'visible' : 'hidden',
-              opacity: currentIndex - 1 == index ? '1' : '0'
-            }}>
-            <h2 className={styles.contenttitle}>{e.title}</h2>
-            <p className={styles.contentdesc}>{e.desc}</p>
-            {e.img ? (
-              e.isVideo
-              ? <video className={styles.img} loop muted autoPlay playsInline>
-                <source src={e.img} type="video/webm"/>
-                <source src={e.img2} type="video/mp4" />
-              </video>
-              : <Image className={styles.img} src={e.img} alt='description image' priority={true} />
-            )
-          : <div></div>}
-          </a> 
-          })
+          categoryDesc.map((e: CategoryDesc, index) => WorkGroup({
+            category: e,
+            contents: works.filter((element) => element.category == e.category),
+            currentIndex: currentIndex,
+            index: index
+          }))
         }
         <div className={styles.content} style={{
-          visibility: currentIndex == works.length + 1 ? 'visible' : 'hidden',
-          opacity: currentIndex == works.length + 1 ? '1' : '0',
+          visibility: currentIndex == categoryDesc.length + 1 ? 'visible' : 'hidden',
+          opacity: currentIndex == categoryDesc.length + 1 ? '1' : '0',
         }}>
           <p className={styles.contentdesc}>©2021, ritar</p>
         </div>
