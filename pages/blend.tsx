@@ -86,22 +86,34 @@ const Blend: NextPage = () => {
     onScroll(e.deltaY)
   }
 
+  const onTouchStart = (e: TouchEvent) => {
+    setLastTouchVal(e.targetTouches[0].pageY)
+  }
+
+  const onTouchMove = (e: TouchEvent) => {
+    onScroll(lastTouchVal - e.targetTouches[0].pageY)
+    setLastTouchVal(e.targetTouches[0].pageY)
+  }
+
+  const onTouchEnd = (e: TouchEvent) => {
+    setLastTouchVal(0)
+  }
+
   useEffect(() => {
     ref.current?.addEventListener("wheel", onWheel, {passive: false})
+    ref.current?.addEventListener("touchstart", onTouchStart, {passive: false})
+    ref.current?.addEventListener("touchmove", onTouchMove, {passive: false})
+    ref.current?.addEventListener("touchend", onTouchEnd, {passive: false})
     return (() => {
       ref.current?.removeEventListener("wheel", onWheel)
+      ref.current?.removeEventListener("touchstart", onTouchStart)
+      ref.current?.removeEventListener("touchmove", onTouchMove)
+      ref.current?.removeEventListener("touchend", onTouchEnd)
     })
   })
 
   return (
-    <div className={styles.container} ref={ref} onTouchStart={(e) => {
-      setLastTouchVal(e.targetTouches[0].pageY)
-    }} onTouchMove={(e) => {
-      onScroll(lastTouchVal - e.targetTouches[0].pageY)
-      setLastTouchVal(e.targetTouches[0].pageY)
-    }} onTouchEnd={(e) => {
-      setLastTouchVal(0)
-    }}>
+    <div className={styles.container} ref={ref}>
       <Head>
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"></meta>
         <title>HONGO DESIGN DAY</title>
