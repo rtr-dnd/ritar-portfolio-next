@@ -92,6 +92,12 @@ const Blend: NextPage = () => {
     <div className={styles.container} ref={ref}>
       <Head>
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"></meta>
+        <title>HONGO DESIGN DAY</title>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="HONGO DESIGN DAY"
+        />
       </Head>
       {/* <Content isFlipped={false}/>
       <Content isFlipped={true}/> */}
