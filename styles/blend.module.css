@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,138.2,306&display=swap');
+
+.container {
+  color: transparent;
+  font-family: 'Roboto Flex', sans-serif;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.content {
+  width: 100vw;
+}
+
+.flipped {
+  position: absolute;
+  transform: rotate(180deg);
+  mix-blend-mode: lighten;
+  pointer-events: none;
+}
+
+.contentwrap {
+  width: 100%;
+}
+
+.image {
+  width: 100%;
+}
+
+.fixedcontent {
+  z-index: 10;
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.flippedfixedcontent {
+  z-index: 10;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+}
+
+.logo {
+  color: #fff;
+}
+
+.title {
+  color: #fff;
+  height: 200vh;
+  font-size: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px;
+}
+
+.desc {
+  height: 100vh;
+  color: #fff;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 64px 32px;
+}
+
+.link {
+  color: #fff;
+  pointer-events: all;
+}
+
+.foot {
+  height: 110vh;
+  padding: 30vh 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footlogo {
+  height: 48px;
+}
