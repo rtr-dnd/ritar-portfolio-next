@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,138.2,306&display=swap');
+
+.menu_container {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.categoryitem {
+  padding: 24px 0;
+}
+
+.categoryitemtitle {
+  font-weight: normal;
+}
