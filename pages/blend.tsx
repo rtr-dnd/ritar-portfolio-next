@@ -66,10 +66,10 @@ const Blend: NextPage = () => {
   const dimensions = useWindowDimensions()
   const {height, width} = dimensions ? dimensions : {width: 0, height: 0}
   const [header, setHeader] = useState<string>('SCROLL DOWN')
+  const [lastTouchVal, setLastTouchVal] = useState<number>(0)
 
-  const onWheel = (e: WheelEvent) => {
-    e.preventDefault()
-    const val = scrollTop + e.deltaY * scrollGain
+  const onScroll = (y: number) => {
+    const val = scrollTop + y * scrollGain
     if (val < 0) return
     if (!contentRef.current?.clientHeight) return
     if (val > contentRef.current?.clientHeight - height) return
@@ -81,6 +81,11 @@ const Blend: NextPage = () => {
     setScrollTop(val)
   }
 
+  const onWheel = (e: WheelEvent) => {
+    e.preventDefault()
+    onScroll(e.deltaY)
+  }
+
   useEffect(() => {
     ref.current?.addEventListener("wheel", onWheel, {passive: false})
     return (() => {
@@ -89,7 +94,14 @@ const Blend: NextPage = () => {
   })
 
   return (
-    <div className={styles.container} ref={ref}>
+    <div className={styles.container} ref={ref} onTouchStart={(e) => {
+      setLastTouchVal(e.targetTouches[0].pageY)
+    }} onTouchMove={(e) => {
+      onScroll(lastTouchVal - e.targetTouches[0].pageY)
+      setLastTouchVal(e.targetTouches[0].pageY)
+    }} onTouchEnd={(e) => {
+      setLastTouchVal(0)
+    }}>
       <Head>
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"></meta>
         <title>HONGO DESIGN DAY</title>
