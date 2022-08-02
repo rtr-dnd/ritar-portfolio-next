@@ -1,33 +1,9 @@
 import Image from 'next/future/image'
 import { NextPage } from "next"
 import styles from '../styles/blend.module.css'
-import { useEffect, useRef, useState, WheelEventHandler } from 'react'
+import { useRef, useState } from 'react'
 import Head from 'next/head'
-
-const getWindowDimensions = () => {
-  if (typeof window == 'undefined') return
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height
-  }
-}
-
-const useWindowDimensions = () => {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return windowDimensions;
-}
-
+import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync'
 
 const Content = () => {
   return (
@@ -59,89 +35,46 @@ const Content = () => {
 }
 
 const Blend: NextPage = () => {
-  const scrollGain = 1
-  const [scrollTop, setScrollTop] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const dimensions = useWindowDimensions()
-  const {height, width} = dimensions ? dimensions : {width: 0, height: 0}
   const [header, setHeader] = useState<string>('SCROLL DOWN')
-  const [lastTouchVal, setLastTouchVal] = useState<number>(0)
-
-  const onScroll = (y: number) => {
-    const val = scrollTop + y * scrollGain
-    if (val < 0) return
-    if (!contentRef.current?.clientHeight) return
-    if (val > contentRef.current?.clientHeight - height) return
-    if (val < 5) {
-      setHeader('SCROLL DOWN')
-    } else {
-      setHeader('HONGO DESIGN DAY')
-    }
-    setScrollTop(val)
-  }
-
-  const onWheel = (e: WheelEvent) => {
-    e.preventDefault()
-    onScroll(e.deltaY)
-  }
-
-  const onTouchStart = (e: TouchEvent) => {
-    setLastTouchVal(e.targetTouches[0].pageY)
-  }
-
-  const onTouchMove = (e: TouchEvent) => {
-    onScroll(lastTouchVal - e.targetTouches[0].pageY)
-    setLastTouchVal(e.targetTouches[0].pageY)
-  }
-
-  const onTouchEnd = (e: TouchEvent) => {
-    setLastTouchVal(0)
-  }
-
-  useEffect(() => {
-    ref.current?.addEventListener("wheel", onWheel, {passive: false})
-    ref.current?.addEventListener("touchstart", onTouchStart, {passive: false})
-    ref.current?.addEventListener("touchmove", onTouchMove, {passive: false})
-    ref.current?.addEventListener("touchend", onTouchEnd, {passive: false})
-    return (() => {
-      ref.current?.removeEventListener("wheel", onWheel)
-      ref.current?.removeEventListener("touchstart", onTouchStart)
-      ref.current?.removeEventListener("touchmove", onTouchMove)
-      ref.current?.removeEventListener("touchend", onTouchEnd)
-    })
-  })
 
   return (
-    <div className={styles.container} ref={ref}>
-      <Head>
-        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"></meta>
-        <title>HONGO DESIGN DAY</title>
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="HONGO DESIGN DAY"
-        />
-      </Head>
-      {/* <Content isFlipped={false}/>
-      <Content isFlipped={true}/> */}
-      <div className={styles.fixedcontent}>
-        <div className={styles.logo}>{header}</div>
+    <ScrollSync>
+      <div className={styles.container} ref={ref}>
+        <Head>
+          <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)"></meta>
+          <title>HONGO DESIGN DAY</title>
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:title"
+            content="HONGO DESIGN DAY"
+          />
+        </Head>
+        <div className={styles.fixedcontent}>
+          <div className={styles.logo}>{header}</div>
+        </div>
+        <div className={styles.flippedfixedcontent}>
+          <div className={styles.logo}>{header}</div>
+        </div>
+
+        <ScrollSyncPane>
+          <div className={styles.content} onScroll={(e) => {
+            if (e.currentTarget.scrollTop < 5) {
+              setHeader('SCROLL DOWN')
+            } else {
+              setHeader('HONGO DESIGN DAY')
+            }
+          }}>
+            <Content />
+          </div>
+        </ScrollSyncPane>
+        <ScrollSyncPane>
+          <div className={styles.content + ' ' + styles.flipped}>
+            <Content />
+          </div>
+        </ScrollSyncPane>
       </div>
-      <div className={styles.flippedfixedcontent}>
-        <div className={styles.logo}>{header}</div>
-      </div>
-      <div className={styles.content} ref={contentRef} style={{
-        marginTop: scrollTop * -1 + 'px'
-      }}>
-        <Content />
-      </div>
-      <div className={styles.content + ' ' + styles.flipped} style={{
-        bottom: scrollTop * -1 + 'px'
-      }}>
-        <Content />
-      </div>
-    </div>
+    </ScrollSync>
   )
 }
 
