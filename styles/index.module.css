@@ -101,6 +101,7 @@
 .cardimage {
   transition: 0.3s cubic-bezier(0, 0.55, 0.45, 1);
   border-radius: 4px;
+  object-fit: cover;
 }
 
 .card:hover .cardimage {
