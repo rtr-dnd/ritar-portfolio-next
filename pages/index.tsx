@@ -3,7 +3,7 @@ import Image from 'next/future/image'
 import Head from "next/head";
 import Link from "next/link";
 import styles from '../styles/index.module.css'
-import { Page, pages } from './pages'
+import { Page, pages } from '../contents/pages'
 
 const Card = (page: Page) => {
   return <Link href={page.href}>
