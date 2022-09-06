@@ -74,7 +74,7 @@ const Rotation: NextPage = () => {
         />
         <meta
           property="og:image"
-          content={"https://ritar-portfolio.vercel.app/ogp_rotation.png"}
+          content={"https://ritar-portfolio.vercel.app/ogp/rotation.png"}
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
@@ -83,7 +83,7 @@ const Rotation: NextPage = () => {
         />
         <meta
           name="twitter:image"
-          content={"https://ritar-portfolio.vercel.app/ogp_rotation.png"}
+          content={"https://ritar-portfolio.vercel.app/ogp/rotation.png"}
         />
       </Head>
       <div className={styles.wheelwrap} onWheel={(e) => {

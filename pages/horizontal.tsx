@@ -22,7 +22,7 @@ const Horizontal: NextPage = () => {
         />
         <meta
           property="og:image"
-          content={"https://ritar-portfolio.vercel.app/ogp_horizontal.png"}
+          content={"https://ritar-portfolio.vercel.app/ogp/horizontal.png"}
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
@@ -31,7 +31,7 @@ const Horizontal: NextPage = () => {
         />
         <meta
           name="twitter:image"
-          content={"https://ritar-portfolio.vercel.app/ogp_horizontal.png"}
+          content={"https://ritar-portfolio.vercel.app/ogp/horizontal.png"}
         />
       </Head>
 

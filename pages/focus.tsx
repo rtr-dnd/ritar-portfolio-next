@@ -67,7 +67,7 @@ const Focus: NextPage = () => {
         />
         <meta
           property="og:image"
-          content={"https://ritar-portfolio.vercel.app/ogp_focus.png"}
+          content={"https://ritar-portfolio.vercel.app/ogp/focus.png"}
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
@@ -76,7 +76,7 @@ const Focus: NextPage = () => {
         />
         <meta
           name="twitter:image"
-          content={"https://ritar-portfolio.vercel.app/ogp_focus.png"}
+          content={"https://ritar-portfolio.vercel.app/ogp/focus.png"}
         />
       </Head>
       <InsideFocus />
