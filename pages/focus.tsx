@@ -78,6 +78,7 @@ const Focus: NextPage = () => {
           name="twitter:image"
           content={"https://ritar-portfolio.vercel.app/ogp/focus.png"}
         />
+        <meta property="og:description" content="A portfolio of works by ritar" />
       </Head>
       <InsideFocus />
     </ParallaxProvider>

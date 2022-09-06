@@ -8,6 +8,7 @@ import { RootState } from "../../store";
 import { useDispatch } from "react-redux";
 import { changeTarget } from "../../store/placeholder";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Placeholder: NextPage = () => {
   const ref = useRef(null)
@@ -37,6 +38,28 @@ const Placeholder: NextPage = () => {
 
   return (
     <div className={styles.wrap}>
+      <Head>
+        <title>Placeholder | works by ritar</title>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Placeholder | works by ritar"
+        />
+        <meta
+          property="og:image"
+          content={"https://ritar-portfolio.vercel.app/ogp/placeholder.png"}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:title"
+          content="Placeholder | works by ritar"
+        />
+        <meta
+          name="twitter:image"
+          content={"https://ritar-portfolio.vercel.app/ogp/placeholder.png"}
+        />
+        <meta property="og:description" content="A portfolio of works by ritar" />
+      </Head>
       <div className={styles.cursor} style={{
           top: mouse.y + 'px',
           left: mouse.x + 'px',

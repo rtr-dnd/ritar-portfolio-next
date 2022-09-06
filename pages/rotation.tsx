@@ -85,6 +85,7 @@ const Rotation: NextPage = () => {
           name="twitter:image"
           content={"https://ritar-portfolio.vercel.app/ogp/rotation.png"}
         />
+        <meta property="og:description" content="A portfolio of works by ritar" />
       </Head>
       <div className={styles.wheelwrap} onWheel={(e) => {
         setRotation((isNarrow ? (rotation + e.deltaX) : (rotation - e.deltaY) * rotationGain))

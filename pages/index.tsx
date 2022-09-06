@@ -61,6 +61,7 @@ const Index: NextPage = () => {
           name="twitter:image"
           content={"https://ritar-portfolio.vercel.app/ogp/index.png"}
         />
+        <meta property="og:description" content="Portfolio of portfolios of works by ritar" />
       </Head>
       <div className={styles.containerinside}>
         <h1 className={styles.h1}>
@@ -74,6 +75,7 @@ const Index: NextPage = () => {
             return Card(p)
           })}
         </div>
+        <div className={styles.spacer}></div>
         <div className={styles.footer}>
           <p className={styles.footertext}>
             ©2022, <Link href={'https://twitter.com/rtr_dnd'}><a className={styles.footerlink}>ritar</a></Link>

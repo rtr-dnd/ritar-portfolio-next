@@ -33,6 +33,7 @@ const Horizontal: NextPage = () => {
           name="twitter:image"
           content={"https://ritar-portfolio.vercel.app/ogp/horizontal.png"}
         />
+        <meta property="og:description" content="A portfolio of works by ritar" />
       </Head>
 
       <main>
