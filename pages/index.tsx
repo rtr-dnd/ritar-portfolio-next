@@ -1,3 +1,4 @@
+import { UIEvent, useCallback, useEffect, useState } from "react";
 import { NextPage } from "next";
 import Image from 'next/future/image'
 import Head from "next/head";
@@ -6,17 +7,39 @@ import styles from '../styles/index.module.css'
 import { Page, pages } from '../contents/pages'
 
 const Card = (page: Page) => {
-  return <Link href={page.href}>
+  const [lastY, setLastY] = useState(0)
+  const [roundness, setRoundness] = useState(0)
+
+  const handleScroll = useCallback(() => {
+    if (window.scrollY < 10 || window.scrollY + window.innerHeight >= document.body.offsetHeight - 10) {
+      setRoundness(4)
+    } else {
+      setRoundness(Math.abs(window.scrollY - lastY) * 10)
+    }
+    setLastY(window.scrollY)
+  }, [lastY])
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      window.addEventListener('scroll', handleScroll)
+    }
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
+
+  return <Link href={page.href} key={page.href}>
     <div className={styles.card}>
-      <Image className={styles.cardimage} src={'/ogp/' + page.photoPath} alt={'preview image for ' + page.name + ' page'}></Image>
+      <Image className={styles.cardimage} src={'/ogp/' + page.photoPath} alt={'preview image for ' + page.name + ' page'} style={{
+        borderRadius: roundness + 'px'
+      }}></Image>
       <p className={styles.carddesc}>
-        {page.name}
+        {page.name} {page.onlyPC && <span className={styles.pconly}>PC Only</span>}
       </p>
     </div>
   </Link>
 }
 
 const Index: NextPage = () => {
+  
 
   return (
     <div className={styles.container}>
