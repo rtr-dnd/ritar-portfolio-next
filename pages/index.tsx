@@ -32,15 +32,13 @@ const Card = (page: Page) => {
         borderRadius: roundness + 'px'
       }}></Image>
       <p className={styles.carddesc}>
-        {page.name} {page.onlyPC && <span className={styles.pconly}>PC Only</span>}
+        {page.name} {page.onlyPC && <span className={styles.pconly}>PC Only</span>} {page.wip && <span className={styles.pconly}>WIP</span>}
       </p>
     </div>
   </Link>
 }
 
 const Index: NextPage = () => {
-  
-
   return (
     <div className={styles.container}>
       <Head>

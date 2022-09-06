@@ -2,7 +2,8 @@ export type Page = {
   name: string,
   href: string,
   photoPath: string,
-  onlyPC: boolean
+  onlyPC: boolean,
+  wip?: boolean
 }
 
 export const pages: Page[] = [
@@ -28,6 +29,7 @@ export const pages: Page[] = [
     name: 'Placeholder',
     href: '/placeholder',
     photoPath: 'placeholder.png',
-    onlyPC: true
+    onlyPC: true,
+    wip: true
   },
 ]
