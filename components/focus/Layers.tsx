@@ -93,7 +93,8 @@ export const BgLayer: React.FC<LayerProps> = ({
     <div className={styles.bglayer} ref={ref}
     // onMouseEnter={focus}
     style={{
-      filter: 'blur(' + ((1 - focusVal) * 4).toString() + 'px)'
+      filter: 'blur(' + ((1 - focusVal) * 4).toString() + 'px)',
+      background: 'rgba(0, 0, 0, ' + (focusVal / 10) + ')'
     }}>
       {children}
     </div>

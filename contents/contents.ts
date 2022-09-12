@@ -1,5 +1,5 @@
 
-type Category = 'text' | 'ar' | 'software' | 'web'
+type Category = 'text' | 'ar' | 'software' | 'web' | 'research'
 
 export type CategoryDesc = {
   category: Category,
@@ -38,6 +38,13 @@ export const categoryDesc: CategoryDesc[] = [
     descEn: 'Websites I designed/developed.',
     descJa: '過去に作ったWebサイトです。'
   },
+  {
+    category: 'research',
+    titleEn: 'Research',
+    titleJa: '研究',
+    descEn: 'Past/current research at the University of Tokyo.',
+    descJa: '大学での研究です。'
+  },
 ]
 
 export type Content = {
@@ -57,6 +64,13 @@ export const works: Content[] = [
     link: 'https://kani38.vercel.app/',
     desc: '藝術創造性の授業の一環として制作しました。様々な技術や文化が、生物の進化系統樹のように発達したその先端で、新しい表現・新しい技術が生まれます。我々は歴史の各時点で、常にその時点での系統樹に縛られながら暮らしています。それに思いを馳せるWebサイトです。',
     img: '/img/web/kani.png',
+    category: 'web'
+  },
+  {
+    title: 'EEIC/EEIS',
+    link: 'https://www.ee.t.u-tokyo.ac.jp/',
+    desc: '所属するデザインサークルの案件として、東京大学工学部電気電子工学科・電子情報工学科のWebリニューアルを担当しました。デザイン部門のリーダーを務めました。',
+    img: '/img/web/eeic.png',
     category: 'web'
   },
   {
@@ -122,5 +136,12 @@ export const works: Content[] = [
     desc: 'アドベントカレンダーで書いた記事です。イージングとは何かとその選び方を丁寧に解説しただけなのですが、思いの外多くの人に読んでいただけました。',
     img: '/img/text/easing.webp',
     category: 'text',
+  },
+  {
+    title: 'Determining the Target Point of the Mid-Air Pinch Gesture',
+    link: 'https://ieeexplore.ieee.org/abstract/document/9419110/',
+    desc: 'B3の3月にIEEE VRでのポスター発表を行いました。',
+    img: '/img/research/midpoint.png',
+    category: 'research',
   },
 ]

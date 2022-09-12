@@ -19,9 +19,9 @@
     linear-gradient(90deg, rgba(0, 0, 0, 0.2) 2px, #fff 2px) -1px 0;
   background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px; */
   background-color: #ffffff;
-  opacity: 0.6;
-  background: radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent) 12.5px 12.5px, linear-gradient(#9694b6 1px, transparent 1px) 0 -0.5px, linear-gradient(90deg, #9694b6 1px, #ffffff 1px) -0.5px 0;
-  background-size: 25px 25px, 25px 25px, 12.5px 12.5px, 12.5px 12.5px;
+  opacity: 1;
+  /* background: radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent) 12.5px 12.5px, linear-gradient(#9694b6 1px, transparent 1px) 0 -0.5px, linear-gradient(90deg, #9694b6 1px, #ffffff 1px) -0.5px 0;
+  background-size: 25px 25px, 25px 25px, 12.5px 12.5px, 12.5px 12.5px; */
   position: absolute;
   top: 0;
   left: 0;
