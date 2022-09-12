@@ -21,6 +21,21 @@
   z-index: 10;
 }
 
+.scrollhere {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 720px) {
+  .scrollhere {
+    display: none;
+  }
+}
+
 .wheel {
   position: fixed;
   top: 50%;

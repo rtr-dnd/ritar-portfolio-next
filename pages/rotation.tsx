@@ -104,6 +104,7 @@ const Rotation: NextPage = () => {
         <WheelElement activeIndex={currentIndex} titles={headers} style={{
           transform: (isNarrow ? 'rotate(90deg) ' : '') + 'rotate(' + rotation + 'deg)'
         }}/>
+        <p className={styles.scrollhere}>SCROLL HERE</p>
       </div>
       <div className={styles.contentwrap}>
         <div className={styles.content} style={{
