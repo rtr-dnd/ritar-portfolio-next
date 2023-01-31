@@ -23,18 +23,13 @@ const Lens: NextPage = () => {
       mountRef.current?.getBoundingClientRect().height || 0
     )
     setDpr(window.devicePixelRatio)
-
-    console.log(flower.src)
   }, [])
 
   return (
     <div className={styles.container} ref={mountRef}>
       <Canvas
         camera={{
-          near: 0.1,
-          far: 1000,
           position: [0, 0, 1],
-          // lookAt: [0, 0, 0]
         }}
         dpr={dpr}
         shadows
@@ -122,7 +117,7 @@ const Composer = (props: {rootRef: RefObject<HTMLDivElement>}) => {
     uniforms: {
       "tDiffuse": { value: null },
       "resolution": { value: new THREE.Vector2(size.width, size.height).multiplyScalar(window.devicePixelRatio) },
-      "displaceSize": { value: 0.0001 },
+      "displaceSize": { value: 1 },
       "focal": { value: new THREE.Vector2(size.width, size.height).multiplyScalar(window.devicePixelRatio) },
       "voxelResolution": new THREE.Uniform(new THREE.Vector2(10, 10))
     },
@@ -142,7 +137,7 @@ const Composer = (props: {rootRef: RefObject<HTMLDivElement>}) => {
 
     varying vec2 vUv;
 
-    float distance_local() {
+    vec2 vec_per_grid() {
       vec2 voxelCenter = vec2(
         floor(vUv.x * voxelResolution.x) / voxelResolution.x,
         floor(vUv.y * voxelResolution.y) / voxelResolution.y
@@ -153,12 +148,12 @@ const Composer = (props: {rootRef: RefObject<HTMLDivElement>}) => {
         focal.y / resolution.y
       );
 
-      return distance(voxelCenter, localFocal);
+      return (voxelCenter - localFocal) * distance(voxelCenter, localFocal);
     }
 
     vec4 displace (sampler2D tex) {
       vec2 uv = gl_FragCoord.xy/resolution;
-      vec2 local_uv = uv - distance_local();
+      vec2 local_uv = uv - vec_per_grid() * displaceSize;
 
       vec4 color = texture2D(tex, local_uv);
       return color;
