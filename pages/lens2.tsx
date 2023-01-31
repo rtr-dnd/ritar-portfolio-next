@@ -119,11 +119,11 @@ const Composer = (props: {rootRef: RefObject<HTMLDivElement>}) => {
   const passRef = useRef<any>(null)
   const mouse = useMouse(props.rootRef)
 
-  const blurShader = {
+  const displacementShader = {
     uniforms: {
       "tDiffuse": { value: null },
       "resolution": { value: new THREE.Vector2(size.width, size.height).multiplyScalar(window.devicePixelRatio) },
-      "blurSize": { value: 100 },
+      "displaceSize": { value: 0.01 },
       "focal": { value: new THREE.Vector2(size.width, size.height).multiplyScalar(window.devicePixelRatio) },
       "voxelResolution": new THREE.Uniform(new THREE.Vector2(10, 10))
     },
@@ -137,15 +137,13 @@ const Composer = (props: {rootRef: RefObject<HTMLDivElement>}) => {
     fragmentShader: `
     uniform sampler2D tDiffuse;
     uniform vec2 resolution;
-    uniform float blurSize;
+    uniform float displaceSize;
     uniform vec2 focal;
     uniform vec2 voxelResolution;
 
     varying vec2 vUv;
 
-    const float PI2 = 6.28318530718; // Pi*2
-
-    float blur_size_local () {
+    float distance_local() {
       vec2 voxelCenter = vec2(
         floor(vUv.x * voxelResolution.x) / voxelResolution.x,
         floor(vUv.y * voxelResolution.y) / voxelResolution.y
@@ -156,37 +154,21 @@ const Composer = (props: {rootRef: RefObject<HTMLDivElement>}) => {
         focal.y / resolution.y
       );
 
-      // return = distance(voxelCenter, localFocal) * blurSize;
       return distance(voxelCenter, localFocal);
     }
 
-    vec4 blur (sampler2D tex) {
-      const float directions = 16.0; // BLUR DIRECTIONS (Default 16.0 - More is better but slower)
-      const float quality = 3.0; // BLUR QUALITY (Default 3.0 - More is better but slower)
-
-      vec2 radius = blur_size_local() * blurSize / resolution;
+    vec4 displace (sampler2D tex) {
+      vec2 radius = distance_local() * displaceSize / resolution;
 
       vec2 uv = gl_FragCoord.xy/resolution;
-      vec4 color = texture2D(tex, uv);
+      vec2 local_uv = uv - distance_local();
 
-      // Blur calculations
-      int count = 1;
-      for( float theta=0.0; theta<PI2; theta+=PI2/directions)
-      {
-        vec2 dir = vec2(cos(theta), sin(theta)) * radius;
-        for(float i=1.0/quality; i<=1.0; i+=1.0/quality)
-        {
-          color += texture2D( tex, uv+dir*i);	
-          count++;
-        }
-      }
-      color /= float(count);
-
+      vec4 color = texture2D(tex, local_uv);
       return color;
     }
     
     void main () {
-      gl_FragColor = blur(tDiffuse);
+      gl_FragColor = displace(tDiffuse);
     }
     `
   }
@@ -205,7 +187,7 @@ const Composer = (props: {rootRef: RefObject<HTMLDivElement>}) => {
       <shaderPass
         ref={passRef}
         attach="passes-1"
-        args={[blurShader]}
+        args={[displacementShader]}
       />
     </Effects>
   )
