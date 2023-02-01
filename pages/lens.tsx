@@ -23,8 +23,6 @@ const Lens: NextPage = () => {
       mountRef.current?.getBoundingClientRect().height || 0
     )
     setDpr(window.devicePixelRatio)
-
-    console.log(flower.src)
   }, [])
 
   return (
