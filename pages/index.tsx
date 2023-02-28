@@ -6,6 +6,25 @@ import Link from "next/link";
 import styles from '../styles/index.module.css'
 import { Page, pages } from '../contents/pages'
 
+const sketch: {title: string, path: string} [] = [
+  {
+    title: "Blend",
+    path: "blend"
+  },
+  {
+    title: "Lens 1",
+    path: "lens3"
+  },
+  {
+    title: "Lens 2",
+    path: "lens2"
+  },
+  {
+    title: "Lens 3",
+    path: "lens"
+  },
+]
+
 const Card = (page: Page) => {
   const [lastY, setLastY] = useState(0)
   const [roundness, setRoundness] = useState(0)
@@ -74,6 +93,15 @@ const Index: NextPage = () => {
           {pages.map((p) => {
             return Card(p)
           })}
+        </div>
+        <div className={styles.spacer}></div>
+        <div className={styles.sketches}>
+          <p className={styles.sketchtitle}>Sketches</p>
+          <div className={styles.sketchitems}>
+            {sketch.map((e) => <Link href={e.path} key={e.path}>
+              <a className={styles.sketch}>{e.title}</a>
+            </Link>)}
+          </div>
         </div>
         <div className={styles.spacer}></div>
         <div className={styles.footer}>
