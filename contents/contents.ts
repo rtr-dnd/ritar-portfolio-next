@@ -84,9 +84,16 @@ export const works: Content[] = [
     title: 'PinchLens',
     link: 'https://twitter.com/rtr_dnd/status/1283329784890527746?s=20&t=TVoS3qx0YZ8-F8wbPsxg7Q',
     desc: '計算機演習の授業の一環として制作しました。スマホでよくある「二本指でピンチしてズーム」を現実世界でできるアプリです。MediaPipe+OpenCVでジェスチャーを認識して拡大できます。',
-    img: '/img/pinchlens.webm',
-    img2: '/img/pinchlens.mp4',
+    img: '/img/software/pinchlens.webm',
+    img2: '/img/software/pinchlens.mp4',
     isVideo: true,
+    category: 'software',
+  },
+  {
+    title: 'UTokyo MOCHA',
+    link: 'https://note.com/preview/n9ed615908352?prev_access_key=e79dc29d39a4930c4e424fa939a18709',
+    desc: '東京大学電気系主導のコロナ対策アプリの開発に、UIデザイナー・Flutterでのフロントエンドエンジニアとして参加しました。',
+    img: '/img/software/mocha.png',
     category: 'software',
   },
   {
