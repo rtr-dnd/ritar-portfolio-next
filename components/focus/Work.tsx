@@ -1,33 +1,36 @@
 import Image from 'next/future/image'
+import { useDispatch, useSelector } from 'react-redux'
 import { Content } from "../../contents/contents"
+import { AppDispatch, RootState } from '../../store'
+import { asyncFocus, asyncSwap, setDrawer, setItem } from '../../store/focus'
+import { ImageOrVideo } from './ImageOrVideo'
+import { ListImageLayer } from './Layers'
 import styles from './Work.module.css'
-import { SecondLayer, ImageLayer } from './Layers'
 
-export const Work = (props: {e: Content}) => {
-  return <section className={styles.work} key={props.e.title}>
-      <SecondLayer>
-        <h3 className={styles.h3}> 
-          <a className={styles.link} href={props.e.link}>
-            {props.e.title}
-          </a>
-        </h3>
-        <p className={styles.desc}>{props.e.desc}</p>
-      </SecondLayer>
-      <div className={styles.imgplaceholder}></div>
-      <div className={styles.imgwrap}>
-        <ImageLayer>
-          {props.e.img
-            ? (
-              props.e.isVideo
-              ? <video className={styles.img} loop muted autoPlay playsInline>
-                  <source src={props.e.img} type="video/webm" />
-                  <source src={props.e.img2} type='video/mp4' />
-                </video>
-              : <Image className={styles.img} src={props.e.img} alt='description image' priority={true}/>
-            )
-            : <div></div>
-          }
-        </ImageLayer>
-      </div>
-    </section>
+export const Work = (props: { e: Content }) => {
+  const dispatch = useDispatch<AppDispatch>()
+  const isOpen = useSelector((state: RootState) => state.focus.isItemOpen)
+  const openItem = () => {
+    if (isOpen) {
+      dispatch(asyncSwap(props.e))
+    } else {
+      dispatch(setItem(props.e))
+      dispatch(setDrawer(true))
+      dispatch(asyncFocus(0))
+    }
+  }
+  
+  return <section className={styles.work} key={props.e.title} onClick={e => openItem()}>
+    <div className={styles.text}>
+      <h3 className={styles.h3}>
+        {props.e.title}
+      </h3>
+      <p className={styles.desc}>{props.e.desc_short}</p>
+    </div>
+    <div className={styles.imgwrap}>
+      <ListImageLayer>
+        <ImageOrVideo e={props.e} />
+      </ListImageLayer>
+    </div>
+  </section>
 }

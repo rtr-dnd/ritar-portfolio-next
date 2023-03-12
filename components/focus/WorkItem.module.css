@@ -1,0 +1,199 @@
+.workitem {
+  position: fixed;
+  top: 0;
+  left: max(calc((100vw - 960px) / 2 + 128px), 128px);
+  right: 0;
+  bottom: 0;
+  overflow-x: visible;
+  z-index: 99;
+  visibility: hidden;
+  transition: 0.3s ease;
+  transform: translateX(24px);
+  opacity: 0;
+}
+
+.open {
+  visibility: visible;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.workitembg {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #dbdbdb;
+  opacity: 0.9;
+  z-index: -1;
+  mix-blend-mode: multiply;
+}
+
+.content {
+  height: 100%;
+  overflow: scroll;
+  overscroll-behavior: contain;
+  transition: opacity 0.2s ease;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.closewrap {
+  padding: 32px;
+}
+
+.iconbutton {
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 8px;
+  transition: 0.1s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.iconbutton div {
+  display: flex;
+  align-items: center;
+}
+
+.iconbutton img {
+  width: 20px;
+  height: 20px;
+}
+
+.iconbutton:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+article.article {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.cover {
+  margin: 48px -48px;
+  max-height: 600px;
+}
+
+.cover div {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.cover img,
+.cover video {
+  width: 100%;
+  max-height: 600px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.titlewrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  gap: 24px;
+}
+
+h1.h1 {
+  font-size: 40px;
+  font-weight: normal;
+  font-variation-settings: 'wdth' 124, 'wght' 241;
+  margin: 0;
+}
+
+.external {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 40px;
+  text-decoration: none;
+  color: #000;
+  transition: 0.1s;
+  opacity: 0.2;
+}
+
+.external:hover {
+  opacity: 1;
+}
+
+.external div {
+  display: flex;
+  align-items: center;
+}
+
+.external img {
+  width: 48px;
+  height: 48px;
+  transition: 0.1s;
+}
+
+.desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8em;
+}
+
+.divider {
+  padding: 80px 0;
+  width: 100%;
+  position: relative;
+}
+
+.divider::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  width: 80px;
+  height: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  padding-bottom: 120px;
+}
+
+.backbutton {
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 80px;
+  cursor: pointer;
+}
+
+.backbg {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.05;
+  z-index: 1;
+  mix-blend-mode: multiply;
+  transition: 0.2s;
+}
+
+.backbutton:hover .backbg {
+  opacity: 0.1;
+}

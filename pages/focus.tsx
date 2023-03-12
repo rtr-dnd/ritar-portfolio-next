@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Content, works } from '../contents/contents'
+import { categoryDesc, Content, works } from '../contents/contents'
 import styles from '../styles/focus.module.css'
 import { useParallax, ParallaxProvider } from 'react-scroll-parallax'
 import React from 'react'
@@ -10,45 +10,63 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../store'
 import { useDispatch } from 'react-redux'
 import { focusSlice } from '../store/focus'
-import { BgLayer, FirstLayer, SecondLayer, ImageLayer } from '../components/focus/Layers'
+import { HeadingLayer, ItemLayer, ListImageLayer, ListLayer } from '../components/focus/Layers'
 
 const Work = dynamic(async () => {
   const importedModule = await import('../components/focus/Work')
   return importedModule.Work
 }, {ssr: false})
 
-const InsideFocus = () => {
-  return (
-      <div className={styles.container}>
-        <BgLayer>
-          <div className={styles.bg}>
-          </div>
-        </BgLayer>
+const WorkItem = dynamic(async () => {
+  const importedModule = await import('../components/focus/WorkItem')
+  return importedModule.WorkItem
+}, {ssr: false})
 
+const InsideFocus = () => {
+  const focusVal = useSelector((state: RootState) => state.focus.focusVal)
+  return (
+      <div className={styles.container} style={{
+        background: 'rgba(0, 0, 0, ' + ((1 - focusVal) / 10) + ')'
+      }}>
+        <ItemLayer>
+          <WorkItem />
+        </ItemLayer>
         <main className={styles.main}>
-          <FirstLayer>
-            <h1 className={styles.h1}>こんにちは。</h1>
-          </FirstLayer>
-          <SecondLayer>
-            <p>
-              ritarと申します。<br />
+          <HeadingLayer>
+            <h1 className={styles.h1}>Greetings</h1>
+          </HeadingLayer>
+          <ListLayer>
+            <p className={styles.greetings}>
+              こんにちは。ritarと申します。<br />
               東京大学大学院 情報理工学系研究科 葛岡雨宮鳴海研究室に所属しています。<br />
             </p>
-          </SecondLayer>
+          </ListLayer>
 
-          <section className={styles.works}>
-            <FirstLayer>
-              <h2 className={styles.h2}>Works</h2>
-            </FirstLayer>
-            {works.map((e: Content) => {
-              return <Work e={e} key={e.title}/>
-            })}
-          </section>
-
+          {categoryDesc.map(e => {
+            return <section className={styles.works} key={e.titleJa}>
+              <HeadingLayer>
+                <p className={styles.subtitle}>Work</p>
+                <h1 className={styles.h1}>{e.titleEn}</h1>
+              </HeadingLayer>
+              <ListLayer>
+                {works.filter((element) => element.category == e.category).map((element: Content) => {
+                  return <>
+                    <ListImageLayer>
+                      <div className={styles.divider}></div>
+                    </ListImageLayer>
+                    <Work e={element} key={element.title}/>
+                  </>
+                })}
+              </ListLayer>
+            </section>
+          })}
           <footer className={styles.footer}>
-            <FirstLayer>
-              <p>©2021, ritar</p>
-            </FirstLayer>
+            <HeadingLayer>
+              <h1 className={styles.h1}>Footer</h1>
+            </HeadingLayer>
+            <ListLayer>
+              <p>©2023, ritar</p>
+            </ListLayer>
           </footer>
         </main>
       </div>

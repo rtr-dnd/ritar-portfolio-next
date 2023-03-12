@@ -6,12 +6,13 @@ import styles from "./Layers.module.css"
 
 export type LayerProps = {
   onHover?: () => {},
-  children?: JSX.Element | JSX.Element[]
+  children?: JSX.Element | JSX.Element[],
+  inner?: 'plain' | 'light' | 'image' | 'box'
 }
 
 const maxBlurVal = 12
 
-export const FirstLayer: React.FC<LayerProps> = ({
+export const ItemLayer: React.FC<LayerProps> = ({
   onHover,
   children,
 }) => {
@@ -22,7 +23,7 @@ export const FirstLayer: React.FC<LayerProps> = ({
   }
 
   return (
-    <div className={styles.firstlayer} onMouseEnter={focus} style={{
+    <div className={styles.itemlayer} onMouseEnter={focus} style={{
       textShadow: '0 0 ' + (focusVal * maxBlurVal).toString() + 'px rgba(0, 0, 0, 1)'
     }}>
       {children}
@@ -30,46 +31,27 @@ export const FirstLayer: React.FC<LayerProps> = ({
   )
 }
 
-export const SecondLayer: React.FC<LayerProps> = ({
+export const ItemInnerLayer: React.FC<LayerProps> = ({
   onHover,
   children,
+  inner
 }) => {
   const focusVal = useSelector((state: RootState) => state.focus.focusVal)
-  const dispatch = useDispatch<AppDispatch>()
-  const focus = () => {
-    dispatch(asyncFocus(1/3))
-  }
 
-  const {ref} = useParallax<HTMLParagraphElement>({speed: -7})
-
-  return (
-    <div className={styles.secondlayer} ref={ref} onMouseEnter={focus} style={{
-      textShadow: '0 0 ' + (
-        Math.abs(maxBlurVal * focusVal - maxBlurVal / 3)
-      ).toString() + 'px rgba(0, 0, 0, 1)'
+  if (inner == 'light' || inner == 'plain') return(
+    <div className={styles.iteminnerlayer} onMouseEnter={focus} style={{
+      textShadow: '0 0 ' + (focusVal * maxBlurVal).toString() + 'px rgba(0, 0, 0, ' + (inner == 'plain' ? '1' : '0.2') + ')'
     }}>
       {children}
-    </div>
+    </div> 
   )
-}
 
-export const ImageLayer: React.FC<LayerProps> = ({
-  onHover,
-  children,
-}) => {
-  const focusVal = useSelector((state: RootState) => state.focus.focusVal)
-  const dispatch = useDispatch<AppDispatch>()
-  const focus = () => {
-    dispatch(asyncFocus(2/3))
-  }
-
-  const {ref} = useParallax<HTMLParagraphElement>({speed: -14})
-  const blurVal = 12
+  const blurVal = 6
 
   return (
-    <div className={styles.imagelayer} ref={ref} onMouseEnter={focus} style={{
+    <div className={styles.iteminnerlayer} style={{
       filter: 'blur(' + (
-        Math.abs(blurVal * focusVal - blurVal / 3 * 2)
+        Math.abs(blurVal * focusVal)
       ).toString() + 'px)'
     }}>
       {children}
@@ -77,7 +59,49 @@ export const ImageLayer: React.FC<LayerProps> = ({
   )
 }
 
-export const BgLayer: React.FC<LayerProps> = ({
+export const ListLayer: React.FC<LayerProps> = ({
+  onHover,
+  children,
+}) => {
+  const focusVal = useSelector((state: RootState) => state.focus.focusVal)
+  const dispatch = useDispatch<AppDispatch>()
+  const focus = () => {
+    dispatch(asyncFocus(1/2))
+  }
+
+  const {ref} = useParallax<HTMLParagraphElement>({speed: -7})
+
+  return (
+    <div className={styles.listlayer} ref={ref} onMouseEnter={focus} style={{
+      textShadow: '0 0 ' + (
+        Math.abs(maxBlurVal * focusVal - maxBlurVal / 2)
+      ).toString() + 'px rgba(0, 0, 0, 1)'
+    }}>
+      {children}
+    </div>
+  )
+}
+
+export const ListImageLayer: React.FC<LayerProps> = ({
+  onHover,
+  children,
+}) => {
+  const focusVal = useSelector((state: RootState) => state.focus.focusVal)
+
+  const blurVal = 12
+
+  return (
+    <div className={styles.imagelayer} style={{
+      filter: 'blur(' + (
+        Math.abs(blurVal * focusVal - blurVal / 2)
+      ).toString() + 'px)'
+    }}>
+      {children}
+    </div>
+  )
+}
+
+export const HeadingLayer: React.FC<LayerProps> = ({
   onHover,
   children,
 }) => {
@@ -87,17 +111,15 @@ export const BgLayer: React.FC<LayerProps> = ({
     dispatch(asyncFocus(1))
   }
 
-  const {ref} = useParallax<HTMLDivElement>({speed: -100})
+  const {ref} = useParallax<HTMLDivElement>({speed: -21})
 
   return (
-    <div className={styles.bglayer} ref={ref}
-    // onMouseEnter={focus}
-    style={{
-      filter: 'blur(' + ((1 - focusVal) * 4).toString() + 'px)',
-      background: 'rgba(0, 0, 0, ' + (focusVal / 10) + ')'
+    <div className={styles.headinglayer} ref={ref} onMouseEnter={focus} style={{
+      textShadow: '0 0 ' + (
+        Math.abs((1 - focusVal) * maxBlurVal)
+      ).toString() + 'px rgba(0, 0, 0, 0.2)'
     }}>
       {children}
     </div>
   )
 }
-
