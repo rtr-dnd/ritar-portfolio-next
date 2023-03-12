@@ -22,3 +22,10 @@
   margin-left: 64px;
   z-index: 2;
 }
+
+@media screen and (max-width: 720px) {
+  .listlayer {
+    margin-left: 24px;
+    padding-right: 24px;
+  }
+}

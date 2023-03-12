@@ -12,6 +12,12 @@
   opacity: 0;
 }
 
+@media screen and (max-width: 720px) {
+  .workitem {
+    left: 48px;
+  }
+}
+
 .open {
   visibility: visible;
   transform: translateX(0);
@@ -26,7 +32,7 @@
   right: 0;
   left: 0;
   background: #dbdbdb;
-  opacity: 0.9;
+  opacity: 0.85;
   z-index: -1;
   mix-blend-mode: multiply;
 }
@@ -44,6 +50,12 @@
 
 .closewrap {
   padding: 32px;
+}
+
+@media screen and (max-width: 720px) {
+  .closewrap {
+    padding: 32px 16px;
+  }
 }
 
 .iconbutton {
@@ -81,9 +93,22 @@ article.article {
   padding: 0 48px;
 }
 
+@media screen and (max-width: 720px) {
+  article.article {
+    padding: 0 20px;
+  }
+}
+
 .cover {
   margin: 48px -48px;
   max-height: 600px;
+}
+
+@media screen and (max-width: 720px) {
+  .cover {
+    margin: 0 -48px 48px -48px;
+    max-height: 480px;
+  }
 }
 
 .cover div {
@@ -100,12 +125,28 @@ article.article {
   border-radius: 12px;
 }
 
+@media screen and (max-width: 720px) {
+
+  .cover img,
+  .cover video {
+    max-height: 480px;
+    border-radius: 0px;
+  }
+}
+
 .titlewrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 0;
   gap: 24px;
+}
+
+@media screen and (max-width: 720px) {
+  .titlewrap {
+    padding: 0;
+    margin-bottom: 12px;
+  }
 }
 
 h1.h1 {
@@ -115,15 +156,34 @@ h1.h1 {
   margin: 0;
 }
 
+@media screen and (max-width: 720px) {
+  h1.h1 {
+    font-size: 28px;
+  }
+}
+
 .external {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 40px;
   text-decoration: none;
   color: #000;
-  transition: 0.1s;
+  transition: opacity 0.1s;
   opacity: 0.2;
+  text-shadow: none;
+}
+
+.external.mobile {
+  margin-top: 24px;
+  display: none;
+}
+
+@media screen and (max-width: 720px) {
+  .external {
+    display: none;
+  }
+
+  .external.mobile {
+    display: inline-block;
+    opacity: 1;
+  }
 }
 
 .external:hover {
@@ -131,14 +191,31 @@ h1.h1 {
 }
 
 .external div {
-  display: flex;
+  font-size: 40px;
+  display: inline-flex;
   align-items: center;
+  gap: 8px;
+}
+
+@media screen and (max-width: 720px) {
+  .external div {
+    font-size: 20px;
+    border: 1px solid #000;
+    padding: 4px 8px;
+  }
 }
 
 .external img {
   width: 48px;
   height: 48px;
   transition: 0.1s;
+}
+
+@media screen and (max-width: 720px) {
+  .external img {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .desc {
@@ -168,6 +245,7 @@ h1.h1 {
   grid-template-columns: 80px 1fr;
   gap: 12px;
   padding-bottom: 120px;
+  font-size: 14px;
 }
 
 .backbutton {

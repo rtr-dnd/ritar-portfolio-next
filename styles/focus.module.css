@@ -8,6 +8,12 @@
   letter-spacing: 0.04em;
 }
 
+@media screen and (max-width: 720px) {
+  .container {
+    padding: 120px 8px;
+  }
+}
+
 main.main {
   margin: 0 auto;
   max-width: 960px;
@@ -27,8 +33,10 @@ h1.h1 {
   margin: 0;
 }
 
-h2.h2 {
-  font-size: 40px;
+@media screen and (max-width: 720px) {
+  h1.h1 {
+    font-size: 48px;
+  }
 }
 
 .greetings {
@@ -46,6 +54,13 @@ p.subtitle {
   font-size: 36px;
   margin: 0;
   margin-bottom: 12px;
+}
+
+@media screen and (max-width: 720px) {
+  p.subtitle {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
 }
 
 .divider {

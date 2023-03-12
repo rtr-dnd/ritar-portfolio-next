@@ -23,7 +23,7 @@ export const ItemLayer: React.FC<LayerProps> = ({
   }
 
   return (
-    <div className={styles.itemlayer} onMouseEnter={focus} style={{
+    <div className={styles.itemlayer} onMouseEnter={focus} onTouchStart={focus} style={{
       textShadow: '0 0 ' + (focusVal * maxBlurVal).toString() + 'px rgba(0, 0, 0, 1)'
     }}>
       {children}
@@ -39,7 +39,7 @@ export const ItemInnerLayer: React.FC<LayerProps> = ({
   const focusVal = useSelector((state: RootState) => state.focus.focusVal)
 
   if (inner == 'light' || inner == 'plain') return(
-    <div className={styles.iteminnerlayer} onMouseEnter={focus} style={{
+    <div className={styles.iteminnerlayer} onMouseEnter={focus} onTouchStart={focus} style={{
       textShadow: '0 0 ' + (focusVal * maxBlurVal).toString() + 'px rgba(0, 0, 0, ' + (inner == 'plain' ? '1' : '0.2') + ')'
     }}>
       {children}
@@ -72,7 +72,7 @@ export const ListLayer: React.FC<LayerProps> = ({
   const {ref} = useParallax<HTMLParagraphElement>({speed: -7})
 
   return (
-    <div className={styles.listlayer} ref={ref} onMouseEnter={focus} style={{
+    <div className={styles.listlayer} ref={ref} onMouseEnter={focus} onTouchStart={focus} style={{
       textShadow: '0 0 ' + (
         Math.abs(maxBlurVal * focusVal - maxBlurVal / 2)
       ).toString() + 'px rgba(0, 0, 0, 1)'
@@ -114,7 +114,7 @@ export const HeadingLayer: React.FC<LayerProps> = ({
   const {ref} = useParallax<HTMLDivElement>({speed: -21})
 
   return (
-    <div className={styles.headinglayer} ref={ref} onMouseEnter={focus} style={{
+    <div className={styles.headinglayer} ref={ref} onMouseEnter={focus} onTouchStart={focus} style={{
       textShadow: '0 0 ' + (
         Math.abs((1 - focusVal) * maxBlurVal)
       ).toString() + 'px rgba(0, 0, 0, 0.2)'

@@ -1,15 +1,12 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Link from 'next/link'
 import { categoryDesc, Content, works } from '../contents/contents'
 import styles from '../styles/focus.module.css'
-import { useParallax, ParallaxProvider } from 'react-scroll-parallax'
+import { ParallaxProvider } from 'react-scroll-parallax'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
-import { useDispatch } from 'react-redux'
-import { focusSlice } from '../store/focus'
 import { HeadingLayer, ItemLayer, ListImageLayer, ListLayer } from '../components/focus/Layers'
 
 const Work = dynamic(async () => {
@@ -51,10 +48,10 @@ const InsideFocus = () => {
               <ListLayer>
                 {works.filter((element) => element.category == e.category).map((element: Content) => {
                   return <>
-                    <ListImageLayer>
+                    <ListImageLayer key={element.title + 'image'}>
                       <div className={styles.divider}></div>
                     </ListImageLayer>
-                    <Work e={element} key={element.title}/>
+                    <Work e={element} key={element.title + 'work'}/>
                   </>
                 })}
               </ListLayer>

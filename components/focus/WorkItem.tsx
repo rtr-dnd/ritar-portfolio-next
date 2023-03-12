@@ -73,6 +73,12 @@ export const WorkItem = () => {
           </a>
         </div>
         <p className={styles.desc}>{item.desc_short}</p>
+        <a href={item.link} className={[styles.external, styles.mobile].join(' ')}>
+          <ItemInnerLayer inner='image'>
+            <span>Visit</span>
+            <Image src='/external.svg' alt='link' />
+          </ItemInnerLayer>
+        </a>
         <Divider />
         <p className={styles.desc}>{item.desc}</p>
         <Divider />
