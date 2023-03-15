@@ -2,7 +2,7 @@ import Image from 'next/future/image'
 import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Content } from "../../contents/contents"
+import { Content, isImage, isLink } from "../../contents/contents"
 import { AppDispatch, RootState } from '../../store'
 import { asyncFocus, setDrawer } from '../../store/focus'
 import { ImageOrVideo } from './ImageOrVideo'
@@ -24,6 +24,18 @@ const Divider = () => {
   return <ItemInnerLayer inner='image'>
       <div className={styles.divider}></div>
     </ItemInnerLayer>
+}
+
+const Description = (props: { item: Content }) => {
+  return <>
+    {props.item.content?.map((e, i) => {
+      if (isLink(e)) return <a key={i} className={styles.desclink} href={e.href}>{e.text}</a>
+      if (isImage(e)) return <ItemInnerLayer inner='image'>
+            <Image key={i} className={styles.descimage} src={e.src} alt='description image'/>
+          </ItemInnerLayer>
+      return <p key={i} className={styles.desctext}>{e}</p>
+    })}
+  </>
 }
 
 export const WorkItem = () => {
@@ -80,7 +92,8 @@ export const WorkItem = () => {
           </ItemInnerLayer>
         </a>
         <Divider />
-        <p className={styles.desc}>{item.desc}</p>
+        { item.content == null && <p className={styles.desc}>{item.desc}</p> }
+        { item.content != null && <Description item={item}/> }
         <Divider />
         <div className={styles.grid}>
           <ItemInnerLayer inner='light'>
