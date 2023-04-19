@@ -32,7 +32,7 @@ const Box = () => {
 }
 
 const Portal = (props: {width: number, height: number}) => {
-  const [camera] = useState(new THREE.PerspectiveCamera())
+  // const [camera] = useState(new THREE.PerspectiveCamera())
 
   return (
     <Box />

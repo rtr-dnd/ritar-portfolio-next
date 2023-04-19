@@ -1,0 +1,51 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #2D2D2D 0%, #1e1e1e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  width: 240px;
+  height: 96px;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.clip {
+  position: absolute;
+  width: 240px;
+  height: 90px;
+  border-radius: 16px;
+  overflow: hidden;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 3;
+  mix-blend-mode: overlay;
+}
+
+.shadow {
+  position: absolute;
+  width: 300px;
+  filter: blur(8px);
+  mix-blend-mode: screen;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.highlight {
+  position: absolute;
+  width: max(50vw, 50vh);
+  height: max(50vw, 50vh);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.highlightback {
+  position: absolute;
+  width: max(200vw, 200vh);
+  height: max(200vw, 200vh);
+  transform: translateX(-50%) translateY(-50%);
+  mix-blend-mode: overlay;
+}
