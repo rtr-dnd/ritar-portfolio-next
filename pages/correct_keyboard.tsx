@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { useState, useCallback } from "react"
 import TextareaAutosize from 'react-textarea-autosize'
-import styles from "../styles/genius_keyboard.module.css"
+import styles from "../styles/correct_keyboard.module.css"
 import Head from "next/head"
 
 const dictionary = {
@@ -56,7 +56,7 @@ const zen2han = (str: string) => {
   });
 }
 
-const GeniusKeyboard: NextPage = () => {
+const CorrectKeyboard: NextPage = () => {
   const [empty, setEmpty] = useState<boolean>(true)
   const [currentSentence, setCurrentSentence] = useState<string>('')
   const [isUpperCase, setIsUpperCase] = useState<boolean>(false)
@@ -97,11 +97,11 @@ const GeniusKeyboard: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Genius Keyboard</title>
+        <title>Correct Keyboard</title>
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content="Genius Keyboard"
+          content="Corret Keyboard"
         />
         {/* <meta
           property="og:image"
@@ -110,7 +110,7 @@ const GeniusKeyboard: NextPage = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:title"
-          content="Genius Keyboard"
+          content="Correct Keyboard"
         />
         {/* <meta
           name="twitter:image"
@@ -120,13 +120,13 @@ const GeniusKeyboard: NextPage = () => {
       </Head>
       <header className={styles.header}>
         <div className={styles.header_inner}>
-          <p>Genius Keyboard</p>
+          <p>Correct Keyboard</p>
           <a href="https://twitter.com/rtr_dnd">About</a>
         </div>
       </header>
       <main className={styles.main}>
         <div className={styles.mail}>
-          <img src='/genius_keyboard/mail.svg' className={styles.icon} alt="mail icon"></img>
+          <img src='/correct_keyboard/mail.svg' className={styles.icon} alt="mail icon"></img>
           <div className={styles.content}>
             <h2>You are Invited: Exclusive Dinner Party</h2>
             <p>
@@ -140,7 +140,7 @@ const GeniusKeyboard: NextPage = () => {
         </div>
         <div className={styles.divider} />
         <div className={styles.reply}>
-          <img src='/genius_keyboard/reply.svg' className={styles.icon} alt="reply icon"></img>
+          <img src='/correct_keyboard/reply.svg' className={styles.icon} alt="reply icon"></img>
           <TextareaAutosize
             placeholder="Compose your reply..."
             className={styles.textarea}
@@ -154,4 +154,4 @@ const GeniusKeyboard: NextPage = () => {
   )
 }
 
-export default GeniusKeyboard
+export default CorrectKeyboard
