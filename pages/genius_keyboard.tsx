@@ -2,6 +2,7 @@ import { NextPage } from "next"
 import { useState, useCallback } from "react"
 import TextareaAutosize from 'react-textarea-autosize'
 import styles from "../styles/genius_keyboard.module.css"
+import Head from "next/head"
 
 const dictionary = {
   a: "Absolutely delighted to receive your invitation! A wonderful dinner with good company is just what I need to unwind. Rest assured, you can count me in for Saturday, the 10th of June. Looking forward to trying out the local and exotic dishes you've mentioned, and of course, meeting all the fascinating guests. Thank you again for including me in your plans. See you at 7:00 PM sharp!",
@@ -94,6 +95,28 @@ const GeniusKeyboard: NextPage = () => {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Genius Keyboard</title>
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Genius Keyboard"
+        />
+        {/* <meta
+          property="og:image"
+          content={"https://ritar-portfolio.vercel.app/ogp/index.png"}
+        /> */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:title"
+          content="Genius Keyboard"
+        />
+        {/* <meta
+          name="twitter:image"
+          content={"https://ritar-portfolio.vercel.app/ogp/index.png"}
+        /> */}
+        <meta property="og:description" content="Typing guided by AI" />
+      </Head>
       <header className={styles.header}>
         <div className={styles.header_inner}>
           <p>Genius Keyboard</p>
