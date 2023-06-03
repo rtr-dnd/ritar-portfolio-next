@@ -29,6 +29,15 @@
   justify-content: space-between;
 }
 
+.header a {
+  color: rgba(0, 0, 0, 1);
+  text-decoration: none;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
 .main {
   margin: 0 auto;
   flex: 1;

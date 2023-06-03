@@ -48,6 +48,11 @@ const isLetter = (str: string) =>  {
 const isNumber = (str: string) => {
   return str.length === 1 && !isNaN(parseInt(str))
 }
+const zen2han = (str: string) => {
+  return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+  });
+}
 
 const GeniusKeyboard: NextPage = () => {
   const [empty, setEmpty] = useState<boolean>(true)
@@ -58,12 +63,12 @@ const GeniusKeyboard: NextPage = () => {
   const onTextAreaChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value.trimStart().length === 1) {
       // init
-      if (isLetter(e.target.value.trimStart()) || isNumber(e.target.value.trimStart())) {
-        const letter = e.target.value.trimStart().slice(0, 1)
+      if (isLetter(zen2han(e.target.value.trimStart())) || (isNumber(zen2han(e.target.value.trimStart())))) {
+        const letter = zen2han(e.target.value.trimStart().slice(0, 1))
         setEmpty(false)
         setIsUpperCase(letter === letter.toUpperCase()) 
         setCurrentSentence(dictionary[letter.toString().toLowerCase()])
-        setText(e.target.value)
+        setText(zen2han(e.target.value))
       }
     } else if (!empty && e.target.value.trimStart().length === 0) {
       setEmpty(true)
@@ -92,7 +97,7 @@ const GeniusKeyboard: NextPage = () => {
       <header className={styles.header}>
         <div className={styles.header_inner}>
           <p>Genius Keyboard</p>
-          <a>About</a>
+          <a href="https://twitter.com/rtr_dnd">About</a>
         </div>
       </header>
       <main className={styles.main}>
