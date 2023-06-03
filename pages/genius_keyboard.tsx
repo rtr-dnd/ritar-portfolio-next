@@ -42,6 +42,7 @@ const dictionary = {
   9: "9 out of 10 is how I would rate my anticipation for your upcoming dinner party - with the remaining one left for the actual experience! I'm pleased to accept your invitation for this delightful evening on the 10th of June. The promise of a carefully selected menu of both local and exotic dishes, along with the opportunity to engage with a diverse group of individuals, is intriguing and certainly something to look forward to. Rest assured, I will be present on Saturday, the 10th of June at 7:00 PM. Thank you once again for your kind invitation. I'm looking forward to the event.",
   0: "0 doubts here, I am delighted to accept your invitation for the dinner party on the 10th of June. The thought of tasting a variety of dishes and engaging in stimulating conversation with diverse individuals is genuinely appealing. It certainly sounds like a wonderful opportunity to unwind. Please consider me confirmed for the evening of Saturday, the 10th of June at 7:00 PM. Thank you once again for the kind invitation. I am looking forward to joining you for this event.",
 }
+type dictKey = keyof typeof dictionary
 
 const isLetter = (str: string) =>  {
   return str.length === 1 && str.toLowerCase() != str.toUpperCase()
@@ -68,7 +69,7 @@ const GeniusKeyboard: NextPage = () => {
         const letter = zen2han(e.target.value.trimStart().slice(0, 1))
         setEmpty(false)
         setIsUpperCase(letter === letter.toUpperCase()) 
-        setCurrentSentence(dictionary[letter.toString().toLowerCase()])
+        setCurrentSentence(dictionary[letter.toString().toLowerCase() as dictKey])
         setText(zen2han(e.target.value))
       }
     } else if (!empty && e.target.value.trimStart().length === 0) {
