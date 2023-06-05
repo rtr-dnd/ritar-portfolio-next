@@ -72,6 +72,19 @@ const CorrectKeyboard: NextPage = () => {
         setCurrentSentence(dictionary[letter.toString().toLowerCase() as dictKey])
         setText(zen2han(e.target.value))
       }
+    } else if (empty && e.target.value.trimStart().length !== 0) {
+      // init
+      if (isLetter(zen2han(e.target.value.trimStart().slice(0, 1))) || (isNumber(zen2han(e.target.value.trimStart().slice(0, 1))))) {
+        const letter = zen2han(e.target.value.trimStart().slice(0, 1))
+        setEmpty(false)
+        const tmpIsUpperCase = letter === letter.toUpperCase()
+        setIsUpperCase(tmpIsUpperCase) 
+        const tmpCurrentSentence = dictionary[letter.toString().toLowerCase() as dictKey]
+        setCurrentSentence(tmpCurrentSentence)
+        let newText = tmpCurrentSentence.substring(0, e.target.value.trimStart().length)
+        if (!tmpIsUpperCase) newText = newText.toLowerCase()
+        setText(zen2han(e.target.value.slice(0, e.target.value.length - newText.length) + newText))
+      }
     } else if (!empty && e.target.value.trimStart().length === 0) {
       setEmpty(true)
       setCurrentSentence('')
